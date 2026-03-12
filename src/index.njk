@@ -51,51 +51,36 @@ description: Deep dives into Artificial Intelligence, web development, and the t
 
             {% if posts | length > 0 %}
 
-            <!-- Featured post (first/latest) -->
             <p class="section-label">
-                <span class="section-label-num">01</span>
-                Featured
-            </p>
-
-            {% set featuredPost = posts[0] %}
-            <a href="{{ featuredPost.url | url }}" class="post-featured animate-fade-up">
-                <div class="post-featured-img-placeholder">
-                    Featured Article
-                </div>
-                <span class="post-tag">Tech &amp; AI</span>
-                <h2>{{ featuredPost.data.title }}</h2>
-                <p class="post-desc">{{ featuredPost.data.description }}</p>
-                <div class="post-byline">
-                    <span>By Parth</span>
-                    <span class="byline-divider">·</span>
-                    <time>{{ featuredPost.date.toDateString() }}</time>
-                    <span class="read-link">Read Article →</span>
-                </div>
-            </a>
-
-            <!-- Remaining posts as list -->
-            {% if posts | length > 1 %}
-            <p class="section-label" style="margin-top: 0;">
-                <span class="section-label-num">02</span>
                 Latest Articles
             </p>
 
             <div class="post-list">
                 {% for post in posts %}
-                {% if loop.index > 1 %}
-                <a href="{{ post.url | url }}" class="post-item">
+                <a href="{{ post.url | url }}" class="post-item animate-fade-up" style="animation-delay: {{ loop.index0 * 0.05 }}s;">
                     <div>
-                        <div class="post-item-num">0{{ loop.index }}</div>
+                        <!-- Pads single digits with a 0 (e.g., 01, 02, 10, 11) -->
+                        <div class="post-item-num">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</div>
+                        
                         <h3>{{ post.data.title }}</h3>
-                        <p class="card-desc" style="font-size:0.875rem; margin-bottom:4px;">{{ post.data.description }}</p>
-                        <time class="post-item-date">{{ post.date.toDateString() }}</time>
+                        <p class="card-desc" style="font-size:0.875rem; margin-bottom:8px; color: var(--text-muted); font-style: italic;">
+                            {{ post.data.description }}
+                        </p>
+                        
+                        <div class="post-item-date">
+                            <time>{{ post.date.toDateString() }}</time>
+                        </div>
                     </div>
-                    <div class="post-item-thumb-placeholder"></div>
+                    
+                    <!-- Thumbnail: Replace this placeholder div with an <img> tag if you add cover images to your markdown frontmatter -->
+                    {% if post.data.image %}
+                        <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="post-item-thumb">
+                    {% else %}
+                        <div class="post-item-thumb-placeholder"></div>
+                    {% endif %}
                 </a>
-                {% endif %}
                 {% endfor %}
             </div>
-            {% endif %}
 
             {% else %}
             <!-- Empty state -->
@@ -111,7 +96,7 @@ description: Deep dives into Artificial Intelligence, web development, and the t
         <aside class="feed-sidebar" aria-label="Sidebar">
 
             <!-- Square / Rectangle Ad -->
-            <div class="sidebar-widget">
+            <div class="sidebar-widget animate-fade-up" style="animation-delay: 0.1s;">
                 <div class="ad-slot sidebar-ad" aria-label="Advertisement">
                     <p class="ad-label">Advertisement</p>
                     <p class="ad-label-sub">300 × 250</p>
@@ -120,26 +105,27 @@ description: Deep dives into Artificial Intelligence, web development, and the t
             </div>
 
             <!-- About widget -->
-            <div class="sidebar-widget about-widget">
+            <div class="sidebar-widget about-widget animate-fade-up" style="animation-delay: 0.2s;">
                 <p class="widget-title">About</p>
+                <!-- If you are using a metadata.json file, you can change 'Parth' to {{ metadata.author.name }} -->
                 <p class="about-widget-name">Parth</p>
                 <p>
-                    Writing about AI tools, web development, and the evolving digital landscape.
-                    All articles are independently written and researched.
+                    Writing about AI tools, web development, and the evolving digital landscape. 
+                    All articles are independently written, researched, and coded.
                 </p>
             </div>
 
-            <!-- Topics -->
-            <div class="sidebar-widget">
+            <!-- Dynamic Topics / Tags -->
+            <div class="sidebar-widget animate-fade-up" style="animation-delay: 0.3s;">
                 <p class="widget-title">Topics</p>
                 <div class="topic-list">
-                    <a href="#" class="topic-tag">Artificial Intelligence</a>
-                    <a href="#" class="topic-tag">Web Dev</a>
-                    <a href="#" class="topic-tag">Gemini</a>
-                    <a href="#" class="topic-tag">SEO</a>
-                    <a href="#" class="topic-tag">Productivity</a>
-                    <a href="#" class="topic-tag">Tools</a>
-                    <a href="#" class="topic-tag">Static Sites</a>
+                    {# Loop through all collections automatically generated by Eleventy #}
+                    {% for tag, tagPosts in collections %}
+                        {# Filter out default collections like 'all' or 'post' so only actual topics show #}
+                        {% if tag != "all" and tag != "post" %}
+                            <a href="/tags/{{ tag | slugify }}/" class="topic-tag">{{ tag }}</a>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
 

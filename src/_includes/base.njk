@@ -56,14 +56,13 @@
         <!-- Left nav -->
         <nav class="header-left" aria-label="Primary navigation">
             <a href="{{ '/' | url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
-            <a href="#" class="nav-link">Topics</a>
-            <a href="#" class="nav-link">About</a>
+            <a href="{{ '/topics/' | url }}" class="nav-link {% if '/topics/' in page.url %}active{% endif %}">Topics</a>
+            <a href="{{ '/about/' | url }}" class="nav-link {% if '/about/' in page.url %}active{% endif %}">About</a>
         </nav>
 
         <!-- Logo (center) -->
         <a href="{{ '/' | url }}" class="logo" aria-label="Parth Posts home">
             Parth<span class="logo-dot">.</span>Posts
-            <span class="logo-sub">Tech &amp; AI</span>
         </a>
 
         <!-- Right controls -->
@@ -96,9 +95,8 @@
                 <p class="footer-col-title">Navigation</p>
                 <ul class="footer-links">
                     <li><a href="{{ '/' | url }}">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Topics</a></li>
-                    <li><a href="#">RSS Feed</a></li>
+                    <li><a href="{{ '/about/' | url }}">About</a></li>
+                    <li><a href="{{ '/topics/' | url }}">Topics</a></li>
                 </ul>
             </div>
 

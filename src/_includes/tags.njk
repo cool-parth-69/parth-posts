@@ -1,0 +1,53 @@
+---
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+  filter:
+    - all
+    - post
+permalink: /tags/{{ tag | slugify }}/
+layout: base.njk
+eleventyComputed:
+  title: "Topic: {{ tag }}"
+---
+
+<div class="container--narrow" style="padding-top: 64px; padding-bottom: 80px;">
+    
+    <!-- Topic Header -->
+    <div class="post-head animate-fade-up">
+        <div class="post-head-label">
+            <span class="post-category">Topic</span>
+            <div class="post-head-divider"></div>
+            <span class="share-label" style="margin: 0;">{{ collections[tag] | length }} Articles</span>
+        </div>
+        <h1 style="text-transform: capitalize;">{{ tag }}</h1>
+        <p class="post-head-desc">All articles, tutorials, and deep dives published under the <strong>{{ tag }}</strong> category.</p>
+    </div>
+
+    <!-- Articles List -->
+    <div class="post-list" style="border-top: 1px solid var(--border);">
+        {% set tagPosts = collections[tag] | reverse %}
+        {% for post in tagPosts %}
+        <a href="{{ post.url | url }}" class="post-item animate-fade-up" style="animation-delay: {{ loop.index0 * 0.1 }}s;">
+            <div>
+                <div class="post-item-num">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</div>
+                <h3>{{ post.data.title }}</h3>
+                <p class="card-desc" style="font-size:0.875rem; margin-bottom:8px; color: var(--text-muted); font-style: italic;">
+                    {{ post.data.description }}
+                </p>
+                <div class="post-item-date">
+                    <time>{{ post.date.toDateString() }}</time>
+                </div>
+            </div>
+            
+            {% if post.data.image %}
+                <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="post-item-thumb">
+            {% else %}
+                <div class="post-item-thumb-placeholder"></div>
+            {% endif %}
+        </a>
+        {% endfor %}
+    </div>
+
+</div>

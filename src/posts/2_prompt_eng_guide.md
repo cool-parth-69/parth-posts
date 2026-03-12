@@ -4,6 +4,7 @@ title: "Prompt Engineering: The Practical Guide That Actually Works"
 date: 2026-03-11
 description: "Skip the vague tips. Here's a systematic approach to writing prompts that get reliable, high-quality results from any LLM."
 tags: ["post", "Prompt Engineering"]
+image: "/assets/llm.png"
 ---
 
 Most "prompt engineering" guides are just lists of magic phrases. This one isn't. Understanding *why* certain prompts work makes you far more effective than memorizing templates — and helps you adapt when a model doesn't behave as expected.

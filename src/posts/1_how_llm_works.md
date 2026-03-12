@@ -3,7 +3,11 @@ layout: post.njk
 title: "How Large Language Models Actually Work"
 date: 2026-03-11
 description: "A clear, no-fluff breakdown of what LLMs are, how they're trained, and why they sometimes confidently get things wrong."
-tags: ["post", "Artificial Intelligence"]
+tags: 
+    - "post"
+    - "Large Language Models"
+    - "AI"
+image: "/assets/llm.png"
 ---
 
 Large Language Models are everywhere right now — but most explanations either drown you in math or oversimplify to the point of being useless. This article sits in the middle: enough depth to actually understand what's happening, zero unnecessary jargon.

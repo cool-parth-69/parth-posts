@@ -53,7 +53,7 @@ layout: base.njk
                 <span class="post-tags-label">Tags</span>
                 {% for tag in tags %}
                     {% if tag != "post" %}
-                    <a href="#" class="post-tag-pill">{{ tag }}</a>
+                    <a href="{{ ('/tags/' + tag | slugify + '/') | url }}" class="post-tag-pill">{{ tag }}</a>
                     {% endif %}
                 {% endfor %}
             </div>
