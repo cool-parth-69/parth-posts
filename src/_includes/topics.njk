@@ -1,0 +1,35 @@
+---
+layout: base.njk
+title: Topics
+description: Browse all topics and categories on Parth Posts.
+permalink: /topics/
+---
+
+<div class="container--narrow" style="padding-top: 64px; padding-bottom: 80px;">
+
+    <div class="post-head animate-fade-up">
+        <div class="post-head-label">
+            <span class="post-category">Browse</span>
+            <div class="post-head-divider"></div>
+        </div>
+        <h1>All Topics</h1>
+        <p class="post-head-desc">Explore articles by category — from AI and machine learning to web development and digital craft.</p>
+    </div>
+
+    <div class="post-list" style="border-top: 1px solid var(--border);">
+        {% for tag, tagPosts in collections %}
+            {% if tag != "all" and tag != "post" %}
+            <a href="{{ ('/tags/' + tag | slugify + '/') | url }}" class="post-item animate-fade-up">
+                <div>
+                    <h3 style="text-transform: capitalize;">{{ tag }}</h3>
+                    <div class="post-item-date">
+                        <span>{{ tagPosts | length }} article{% if tagPosts | length != 1 %}s{% endif %}</span>
+                    </div>
+                </div>
+                <div class="post-item-thumb-placeholder" style="display:flex; align-items:center; justify-content:center; font-family: var(--font-ui); font-size: 1.5rem; color: var(--text-muted);">→</div>
+            </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</div>

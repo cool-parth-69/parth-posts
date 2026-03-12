@@ -528,6 +528,7 @@ img { max-width: 100%; height: auto; display: block; }
 .post-page {
   display: grid;
   grid-template-columns: 1fr 300px;
+  grid-template-rows: auto 1fr;
   gap: 0;
   max-width: 1160px;
   margin: 0 auto;
@@ -536,9 +537,20 @@ img { max-width: 100%; height: auto; display: block; }
   padding-bottom: 80px;
 }
 
-.post-article { padding-right: 48px; border-right: 1px solid var(--border); }
+/* post-article spans both rows on the left column */
+.post-article {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  padding-right: 48px;
+  border-right: 1px solid var(--border);
+}
 
-.post-aside { padding-left: 32px; }
+/* aside sits in column 2, row 1 */
+.post-aside {
+  grid-column: 2;
+  grid-row: 1;
+  padding-left: 32px;
+}
 
 /* Post header */
 .post-head { margin-bottom: 36px; }
@@ -977,9 +989,27 @@ img { max-width: 100%; height: auto; display: block; }
   .header-left { display: none; }
   .header-right { justify-content: flex-end; }
 
-  .post-page { grid-template-columns: 1fr; }
-  .post-article { padding-right: 0; border-right: none; }
-  .post-aside { padding-left: 0; margin-top: 40px; border-top: 1px solid var(--border); padding-top: 32px; }
+  /* 1. Turn the grid into a flex column */
+  .post-page { display: flex; flex-direction: column; }
+  
+  /* 2. Remove the article box so its children can be reordered freely */
+  .post-article { display: contents; } 
+  
+  /* 3. Set everything inside the article (images, content, footer) to go below by default */
+  .post-article > * { order: 3; }
+  
+  /* 4. Force the post-head to stay at the very top */
+  .post-head { order: 1; margin-bottom: 32px; }
+  
+  /* 5. Force the sidebar right below post-head, but before the main content */
+  .post-aside { 
+    order: 2; 
+    padding-left: 0; 
+    margin-bottom: 32px; 
+    border-bottom: 1px solid var(--border); 
+    padding-bottom: 32px; 
+    margin-top: 0; 
+  }
   .post-aside-inner { position: static; }
   .vertical-ad { height: 250px; position: static; }
 
