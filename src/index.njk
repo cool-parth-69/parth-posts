@@ -1,7 +1,7 @@
 ---
 layout: base.njk
 title: Parth Posts — Tech, AI & Web Development
-description: Deep dives into Artificial Intelligence, web development, and the tools shaping our digital world.
+description: Deep dives into Artificial Intelligence, Websites, and the tools shaping our digital world.
 ---
 
 <!-- ===== HERO ===== -->
@@ -12,7 +12,7 @@ description: Deep dives into Artificial Intelligence, web development, and the t
             Writing on <em>AI</em>, Code<br>& Digital Craft
         </h1>
         <p class="hero-desc animate-fade-up animate-delay-2">
-            Honest, deep-dive articles on artificial intelligence, web development, and the tools reshaping how we work and build online.
+            Honest, deep-dive articles on artificial intelligence, Websites, and the tools reshaping how we work and build online.
         </p>
         <div class="hero-meta animate-fade-up animate-delay-3">
             <span class="hero-meta-item">
@@ -110,7 +110,7 @@ description: Deep dives into Artificial Intelligence, web development, and the t
                 <!-- If you are using a metadata.json file, you can change 'Parth' to {{ metadata.author.name }} -->
                 <p class="about-widget-name">Parth</p>
                 <p>
-                    Writing about AI tools, web development, and the evolving digital landscape. 
+                    Writing about AI tools, Websites, and the evolving digital landscape. 
                     All articles are independently written, researched, and coded.
                 </p>
             </div>
@@ -123,7 +123,7 @@ description: Deep dives into Artificial Intelligence, web development, and the t
                     {% for tag, tagPosts in collections %}
                         {# Filter out default collections like 'all' or 'post' so only actual topics show #}
                         {% if tag != "all" and tag != "post" %}
-                            <a href="/tags/{{ tag | slugify }}/" class="topic-tag">{{ tag }}</a>
+                            <a href="./tags/{{ tag | slugify }}/" class="topic-tag">{{ tag }}</a>
                         {% endif %}
                     {% endfor %}
                 </div>
